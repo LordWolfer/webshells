@@ -398,20 +398,20 @@ class my_sql {
 					}
 					$this->dump[] = 'INSERT INTO `'.$table.'` (`'.@implode("`, `", $this->columns).'`) VALUES (\''.@implode("', '", $this->rows[$i]).'\');';
 				}
-				break;
-    case 'MSSQL':
-     $this->dump[0] = '## MSSQL dump';
-     if($this->query('SELECT * FROM '.$table)!=1)
- return 0;
-   if(!$this->get_result())
- return 0;
-   for($i=0;$i<$this->num_rows;$i++)    {
-      foreach($this->rows[$i] as $k=>$v) {
-$this->rows[$i][$k] = @addslashes($v);
-}
-    $this->dump[] = 'INSERT INTO '.$table.' ('.@implode(", ", $this->columns).') VALUES (\''.@implode("', '", $this->rows[$i]).'\');';
-    }
-    break;
+			break;
+			case 'MSSQL':
+				$this->dump[0] = '## MSSQL dump';
+				if($this->query('SELECT * FROM '.$table)!=1)
+					return 0;
+				if(!$this->get_result())
+					return 0;
+				for($i=0;$i<$this->num_rows;$i++)
+					foreach($this->rows[$i] as $k=>$v) {
+						$this->rows[$i][$k] = @addslashes($v);
+					}
+				$this->dump[] = 'INSERT INTO '.$table.' ('.@implode(", ", $this->columns).') VALUES (\''.@implode("', '", $this->rows[$i]).'\');';
+				}
+			break;
     case 'PostgreSQL':
      $this->dump[0] = '## PostgreSQL dump';
      if($this->query('SELECT * FROM '.$table)!=1)
